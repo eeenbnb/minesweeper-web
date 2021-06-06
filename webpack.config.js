@@ -5,7 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
   entry: './src/index.ts',
   output: {
-    path: path.resolve(__dirname, './dst'),
+    path: path.resolve(__dirname, './docs'),
     filename: 'bundle.js'
   },
   devServer: {
@@ -57,5 +57,10 @@ module.exports = {
   },
   plugins: [
     new VueLoaderPlugin(),
+    new CopyPlugin({
+      patterns: [
+        path.resolve(__dirname, "src", "index.html"),
+      ]
+    }),
   ]
 }

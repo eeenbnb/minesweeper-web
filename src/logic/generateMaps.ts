@@ -15,7 +15,8 @@ export const generateMaps = (row: number, column: number, bomCount: number):Main
         return {
           count: -1,
           isBom: true,
-          isOpened: false
+          isOpened: false,
+          isFlag: false,
         };
       }
       let count = 0;
@@ -35,7 +36,8 @@ export const generateMaps = (row: number, column: number, bomCount: number):Main
       return {
         count: count,
         isBom: false,
-        isOpened: false
+        isOpened: false,
+        isFlag: false,
       };;
     })
   })
