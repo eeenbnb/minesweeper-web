@@ -1,16 +1,22 @@
-export const generateMaps = (row: number, column: number, bomCount: number):{orignalMap:number[][],gameMap:number[][]} => {
+import { Mains } from '../@types/main'
+
+export const generateMaps = (row: number, column: number, bomCount: number):Mains => {
   const orignalMap:number[][]= [...Array(row)].map(() => {
     return [...Array(column).fill(0)];
   });
 
-  for (let i = 0; i <= bomCount; i++) {
+  for (let i = 0; i < bomCount; i++) {
     orignalMap[Math.floor(Math.random() * row)][Math.floor(Math.random() * column)] = 1;
   };
 
-  const gameMap:number[][] = orignalMap.map((r, i) => {
+  return orignalMap.map((r, i) => {
     return r.map((_, j) => {
       if (orignalMap[i][j]) {
-        return -1;
+        return {
+          count: -1,
+          isBom: true,
+          isOpened: false
+        };
       }
       let count = 0;
       if (orignalMap[i - 1]) {
@@ -26,12 +32,11 @@ export const generateMaps = (row: number, column: number, bomCount: number):{ori
       if (orignalMap[i][j - 1]) count += orignalMap[i][j - 1];
       if (orignalMap[i][j + 1]) count += orignalMap[i][j + 1];
 
-      return count;
+      return {
+        count: count,
+        isBom: false,
+        isOpened: false
+      };;
     })
   })
-
-  return {
-    orignalMap: orignalMap,
-    gameMap: gameMap,
-  }
 }
