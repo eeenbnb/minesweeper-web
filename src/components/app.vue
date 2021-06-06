@@ -47,15 +47,15 @@ export default class App extends Vue {
 
 <style lang="scss">
   .map{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    justify-content: space-evenly;
+    // display: flex;
+    // flex-direction: column;
+    // width: 100%;
+    // height: 100vh;
+    // justify-content: space-evenly;
   }
   .row{
     display: flex;
-    width: 100%;
-    justify-content: space-evenly;
+    // width: 100%;
+    // justify-content: space-evenly;
   }
 </style>

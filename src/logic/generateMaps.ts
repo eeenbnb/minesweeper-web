@@ -1,44 +1,33 @@
 import { Mains } from '../@types/main'
+import { getAroundItems } from './getAroundItems'
 
-export const generateMaps = (row: number, column: number, bomCount: number):Mains => {
-  const orignalMap:number[][]= [...Array(row)].map(() => {
-    return [...Array(column).fill(0)];
-  });
-
-  for (let i = 0; i < bomCount; i++) {
-    orignalMap[Math.floor(Math.random() * row)][Math.floor(Math.random() * column)] = 1;
-  };
-
-  return orignalMap.map((r, i) => {
-    return r.map((_, j) => {
-      if (orignalMap[i][j]) {
-        return {
-          count: -1,
-          isBom: true,
-          isOpened: false,
-          isFlag: false,
-        };
-      }
-      let count = 0;
-      if (orignalMap[i - 1]) {
-        if (orignalMap[i - 1][j - 1]) count += orignalMap[i - 1][j - 1];
-        if (orignalMap[i - 1][j + 1]) count += orignalMap[i - 1][j + 1];
-        count += orignalMap[i - 1][j];
-      }
-      if (orignalMap[i + 1]) {
-        if (orignalMap[i + 1][j - 1]) count += orignalMap[i + 1][j - 1];
-        if (orignalMap[i + 1][j + 1]) count += orignalMap[i + 1][j + 1];
-        count += orignalMap[i + 1][j];
-      }
-      if (orignalMap[i][j - 1]) count += orignalMap[i][j - 1];
-      if (orignalMap[i][j + 1]) count += orignalMap[i][j + 1];
-
+export const generateMaps = (row: number, column: number, bomCount: number): Mains => {
+  let orignalMap: Mains = [...Array(row)].map(() => {
+    return [...Array(column).fill(0).map(() => {
       return {
-        count: count,
+        count: 0,
         isBom: false,
         isOpened: false,
         isFlag: false,
-      };;
+      }
+    })];
+  });
+
+  for (let i = 0; i < bomCount; i++) {
+    const [i, j] = [Math.floor(Math.random() * row), Math.floor(Math.random() * column)];
+    orignalMap[i][j].isBom = true;
+    orignalMap[i][j].count = -1;
+  };
+
+  orignalMap.forEach((r, i) => {
+    r.forEach((_, j) => {
+      if (orignalMap[i][j].count >= 0) {
+        orignalMap[i][j].count = getAroundItems(orignalMap, i, j).reduce((count, nextItem) => {
+          return count += orignalMap[nextItem.i][nextItem.j].isBom ? 1 : 0;
+        }, 0)
+      }
     })
-  })
+  });
+
+  return orignalMap;
 }

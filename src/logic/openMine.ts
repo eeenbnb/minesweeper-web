@@ -6,7 +6,7 @@ export const openMine = (mains: Mains, i: number, j: number): void => {
 
   if (mains[i][j].count == 0) {
     getAroundItems(mains,i,j).forEach((item)=>{
-      if(!item.main.isOpened){
+      if(!mains[item.i][item.j].isOpened){
         openMine(mains, item.i, item.j);
       }
     })
