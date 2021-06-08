@@ -1,20 +1,20 @@
-import { Mains } from '../@types/main'
+import { Mines } from '../@types/mines'
 import { getAroundItems } from './getAroundItems'
 
-export const openMine = (mains: Mains, i: number, j: number): void => {
-  if(mains[i][j].isOpened){
+export const openMine = (mines: Mines, i: number, j: number): void => {
+  if(mines[i][j].isOpened){
     return ;
   }
-  mains[i][j].isOpened = true;
+  mines[i][j].isOpened = true;
 
-  if(mains[i][j].isBom){
+  if(!mines[i][j].isFlag && mines[i][j].isBom){
     alert("boom");
     return ;
   }
 
-  if (mains[i][j].count == 0) {
-    getAroundItems(mains,i,j).forEach((item)=>{
-      openMine(mains, item.i, item.j);
+  if (mines[i][j].count == 0) {
+    getAroundItems(mines,i,j).forEach((item)=>{
+      openMine(mines, item.i, item.j);
     })
   }
 }

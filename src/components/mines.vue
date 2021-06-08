@@ -1,30 +1,30 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { Main } from '../@types/main'
+import { Mine } from '../@types/mines'
 
 @Component({})
 export default class MinesComponents extends Vue {
-  @Prop() readonly main:Main;
+  @Prop() readonly mine:Mine;
 }
 </script>
 
 
 <template>
   <div
-    class="maine-item"
-    :isOpened="main.isOpened"
-    :isFlag="main.isFlag"
-    :count="main.count"
-    @click="$emit('main-click')"
-    @dblclick="$emit('main-db-click')"
-    @click.right.prevent="$emit('main-right-click')"
+    class="mine-item"
+    :isOpened="mine.isOpened"
+    :isFlag="mine.isFlag"
+    :count="mine.count"
+    @click="$emit('mine-click')"
+    @dblclick="$emit('mine-db-click')"
+    @click.right.prevent="$emit('mine-right-click')"
   >
-    {{main.count}}
+    {{mine.count}}
   </div>
 </template>
 
 <style lang="scss">
-  .maine-item{
+  .mine-item{
     width: 80px;
     height: 80px;
 

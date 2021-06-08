@@ -1,8 +1,8 @@
-export interface Main{
+export interface Mine{
   count:number
   isBom:boolean
   isOpened:boolean
   isFlag:boolean
 }
 
-export type Mains = Main[][]
+export type Mines = Mine[][]

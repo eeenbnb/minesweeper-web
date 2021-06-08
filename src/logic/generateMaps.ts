@@ -1,8 +1,8 @@
-import { Mains } from '../@types/main'
+import { Mines } from '../@types/mines'
 import { getAroundItems } from './getAroundItems'
 
-export const generateMaps = (row: number, column: number, bomCount: number): Mains => {
-  let orignalMap: Mains = [...Array(row)].map(() => {
+export const generateMaps = (row: number, column: number, bomCount: number): Mines => {
+  let orignalMap: Mines = [...Array(row)].map(() => {
     return [...Array(column).fill(0).map(() => {
       return {
         count: 0,
