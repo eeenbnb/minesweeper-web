@@ -30,9 +30,9 @@ export default class App extends Vue {
 
 
 <template>
-  <div class="map">
-    <div v-for="(row,i) in maps" class="row">
-      <div v-for="(item,j) in row" class="row__one">
+  <div>
+    <div v-for="(row,i) in maps" class="flex">
+      <div v-for="(item,j) in row">
         <MinesComponents
           :mine="item"
           @mine-click="onClick(i,j)"
@@ -45,16 +45,4 @@ export default class App extends Vue {
 </template>
 
 <style lang="scss">
-  .map{
-    // display: flex;
-    // flex-direction: column;
-    // width: 100%;
-    // height: 100vh;
-    // justify-content: space-evenly;
-  }
-  .row{
-    display: flex;
-    // width: 100%;
-    // justify-content: space-evenly;
-  }
 </style>

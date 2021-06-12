@@ -5,16 +5,20 @@ import { Mine } from '../@types/mines'
 @Component({})
 export default class MinesComponents extends Vue {
   @Prop() readonly mine:Mine;
+
+  get getClassObject(){
+    return {
+      "bg-black":!this.mine.isOpened,
+      "bg-red-500":this.mine.isFlag,
+    }
+  }
 }
 </script>
 
-
 <template>
   <div
-    class="mine-item"
-    :isOpened="mine.isOpened"
-    :isFlag="mine.isFlag"
-    :count="mine.count"
+    class="w-20 h-20 flex items-center justify-center select-none"
+    :class="getClassObject"
     @click="$emit('mine-click')"
     @dblclick="$emit('mine-db-click')"
     @click.right.prevent="$emit('mine-right-click')"
@@ -22,24 +26,3 @@ export default class MinesComponents extends Vue {
     {{mine.count}}
   </div>
 </template>
-
-<style lang="scss">
-  .mine-item{
-    width: 80px;
-    height: 80px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    user-select: none;
-
-    &:not([isOpened]){
-      background-color: black;
-    }
-
-    &[isFlag]{
-      background-color: red;
-    }
-  }
-</style>
